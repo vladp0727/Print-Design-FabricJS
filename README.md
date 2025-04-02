@@ -2,7 +2,7 @@
 
 Print Designer is open source project, which based on Fabric.js
 
-![website](README.md)
+![website](screenshot.jpg)
 
 ## Demo
 
