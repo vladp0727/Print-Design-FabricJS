@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Email - Order created</title>
+  <style>
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <h2>{{ title }}</h2>
+
+  <table>
+    <tbody>
+      <tr>
+        <td>Model:</td>
+        <td>{{ 'client' if clientModel else 'our' }}</td>
+      </tr>
+      <tr>
+        <td>Phone:</td>
+        <td>{{ phone }}</td>
+      </tr>
+      <tr>
+        <td>Price:</td>
+        <td>{{ price }} ₽</td>
+      </tr>
+
+      {% if not clientModel %}    
+        <tr>
+          <td>Size:</td>
+          <td>{{ quantity | safe }}</td>
+        </tr>
+      {% endif %}
+    <tbody>
+  </table>
+
+  <br/>
+
+  {% if json.canvasData.objects.length %}
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Value</th>
+          <th>Attributes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for layer in json.canvasData.objects %}
+          {% if layer.type === 'text' %}
+            <tr>
+              <td>Text</td>
+              <td>{{ layer.text }}</td>
+              <td>
+                <ul>
+                  <li><b>Font size:</b> {{ layer.fontSize * layer.scaleX }}px</li>
+                  <li><b>Font family:</b> {{ layer.fontFamily }}</li>
+                  <li><b>Color:</b> {{ layer.fill }}</li>
+                  <li><b>Rotate:</b> {{ layer.angle }}°</li>
+                  <li><b>Bold:</b> {{ 'yes' if layer.fontWeight === 'bold' else 'no' }}</li>
+                  <li><b>Italic:</b> {{ 'yes' if layer.fontStyle === 'italic' else 'no' }}</li>
+                  <li><b>Underline:</b> {{ 'yes' if layer.underline else 'no' }}</li>
+                  <li><b>Flip horizontally:</b> {{ 'yes' if layer.flipX else 'no' }}</li>
+                  <li><b>Flip vertically:</b> {{ 'yes' if layer.flipY else 'no' }}</li>
+                </ul>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td>Image</td>
+              <td>
+                <img src="{{ layer.src }}" width="100" />
+              </td>
+              <td>
+                <ul>
+                  <li><b>Witdh:</b> {{ layer.width * layer.scaleX }}px</li>
+                  <li><b>Height:</b> {{ layer.height * layer.scaleY }}px</li>
+                  <li><b>Rotate:</b> {{ layer.angle }}°</li>
+                  <li><b>Flip horizontally:</b> {{ 'yes' if layer.flipX else 'no' }}</li>
+                  <li><b>Flip vertically:</b> {{ 'yes' if layer.flipY else 'no' }}</li>
+                </ul>
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+</body>
+</html>

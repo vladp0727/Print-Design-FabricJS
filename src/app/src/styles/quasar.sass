@@ -1,0 +1,34 @@
+@import './quasar.variables.sass'
+@import '~quasar-styl'
+// @import '~quasar-addon-styl'
+
+.scroll-area
+    max-height: calc(100vh - 200px)
+    overflow-y: auto
+    @media (min-width: $breakpoint-sm)
+        height: calc(100vh - 200px)
+
+
+.sm-full-width
+    @media (max-width: $breakpoint-sm)
+        width: 100%
+
+
+.grid-4
+    display: grid
+    grid-template-columns: 1fr
+    grid-gap: 16px
+    @media (min-width: $breakpoint-xs)
+        grid-template-columns: 1fr 1fr
+    @media (min-width: $breakpoint-sm)
+        grid-template-columns: 1fr 1fr 1fr
+    @media (min-width: $breakpoint-md)
+        grid-template-columns: 1fr 1fr 1fr 1fr
+
+.q-px-2
+    padding-left: 2px
+    padding-right: 2px
+
+.q-mx-2
+    margin-left: 2px
+    margin-right: 2px
